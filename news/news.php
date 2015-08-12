@@ -1,10 +1,10 @@
 <?php
-require_once "NewsDB.class.php";
-$news = new NewsDB();
-$errMsg = "";
-if (isset($_POST['submit'])) {
-  require_once "save_news.inc.php";
-}
+  require_once "NewsDB.class.php";
+  $news = new NewsDB();
+  $errMsg = "";
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    require_once "save_news.inc.php";
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,10 +13,10 @@ if (isset($_POST['submit'])) {
 	<meta charset="utf-8" />
 </head>
 <body>
-  <h1>Последние новости</h1>
+  <h1>Последние новости <?=$title?></h1>
   <?php
-    if (!$errMsg == "")
-      echo "Ошибочка вышла!";
+    if ($errMsg !== "")
+      echo "<h3>$errMsg</h3>";
   ?>
   <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
     Заголовок новости:<br />
